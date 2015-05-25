@@ -119,9 +119,18 @@ function draw() {
     angleMode(RADIANS);
 
     translate(width/2, height/2);
-    for (var angle = 0; angle <= 2*PI; angle += PI/6){
-      ellipse((width/4)*cos(angle), (height/4)*sin(angle), low/10, low/10);
+
+    for (var angleB = 0; angleB <= 2*PI; angleB += PI/3){
+      polygon((high+(width/6))*cos(angleB), (high+(height/6))*sin(angleB), high/10, 4);
     }
+    
+    rotate(frameCount/midLo);
+    for (var angle = 0; angle <= 2*PI; angle += PI/12){
+      ellipse((low+(width/4))*cos(angle), (low+(height/4))*sin(angle), low/10, low/10);
+    }
+
+    //rotate(frameCount/midHi);
+    
     
   } else if (numpressed == 5) {
     console.log('5');
