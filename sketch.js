@@ -117,12 +117,10 @@ function draw() {
   } else if (numpressed == 4) {
     noStroke();
     angleMode(RADIANS);
-    
 
-    for (var i = 0; i < width; i+=24){
-      for (var j = 0; j < height; j += 24){
-        ellipse(i, j, low/10, low/10);
-      }
+    translate(width/2, height/2);
+    for (var angle = 0; angle <= 2*PI; angle += PI/6){
+      ellipse((width/4)*cos(angle), (height/4)*sin(angle), low/10, low/10);
     }
     
   } else if (numpressed == 5) {
