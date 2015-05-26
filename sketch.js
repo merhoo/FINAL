@@ -96,7 +96,9 @@ function draw() {
     endShape();
   } else if (numpressed == 3) {
     stroke(255);
+    strokeWeight(15+low/35);
     fill(255,255,255); // spectrum is green
+    for (var i = 0; i < spectrum.length; i+=16){
       var x = map(i, 0, spectrum.length, 0, width);
       var h = map(spectrum[i], 0, 255, 0, height/2);
       line(x, 0, x, h);
