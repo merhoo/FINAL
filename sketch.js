@@ -69,40 +69,41 @@ function draw() {
     stroke(0);
     strokeWeight(midLo/20);
     fill(0, 0, 255-maxx);
+    var cirA = 2*midHi;
     ellipse(map(low, 0, 255, 0, width), 
-      map(high, 0, 255, 0, height), midHi, midHi);
+      map(high, 0, 255, 0, height), cirA, cirA);
     ellipse(width-map(low, 0, 255, 0, width), 
-      height-map(high, 0, 255, 0, height), midHi, midHi);
+      height-map(high, 0, 255, 0, height), cirA, cirA);
     ellipse(width-map(low, 0, 255, 0, width), 
-      map(high, 0, 255, 0, height), midHi, midHi);
+      map(high, 0, 255, 0, height), cirA, cirA);
     ellipse(map(low, 0, 255, 0, width), 
-      height-map(high, 0, 255, 0, height), midHi, midHi);
+      height-map(high, 0, 255, 0, height), cirA, cirA);
 
 
-
+    var cirB = height/2;
     ellipse(map(high, 0, 255, 0, width), 
-      map(low, 0, 255, 0, height), height/4, height/4);
+      map(low, 0, 255, 0, height), cirB, cirB);
 
     ellipse(width-map(high, 0, 255, 0, width), 
-      height-map(low, 0, 255, 0, height), height/4, height/4);
+      height-map(low, 0, 255, 0, height), cirB, cirB);
 
     ellipse(map(high, 0, 255, 0, width), 
-      height-map(low, 0, 255, 0, height), height/4, height/4);
+      height-map(low, 0, 255, 0, height), cirB, cirB);
 
     ellipse(width-map(high, 0, 255, 0, width), 
-      map(low, 0, 255, 0, height), height/4, height/4);
+      map(low, 0, 255, 0, height), cirB, cirB);
 
 
     stroke(255);
 
 
     
-    strokeWeight(map(low, 0, 255, 1, 50));
+    strokeWeight(map(low, 0, 255, 1, 30));
     for (var i = 0; i <= width; i+= (width/map(midLo, 0, 255, 6, 16))){
       line(i, 0, i, height);
     }
 
-    strokeWeight(map(high, 0, 255, 1, 50));
+    strokeWeight(map(high, 0, 255, 1, 30));
     for (var j = 0; j <= height; j+= (height/map(midHi, 0, 255, 6, 16))){
       line(0, j, width, j);
     }
@@ -118,7 +119,7 @@ function draw() {
     noFill();
     beginShape();
     stroke(255,255,255); // waveform is red
-    strokeWeight(low/4);
+    strokeWeight(map(low, 0, 255, 1, 30));
     for (var i = 0; i< waveform.length; i++){
       var x = map(i, 0, waveform.length, 0, width);
       var y = map( waveform[i], 0, 255, 0, height/4);
@@ -127,7 +128,7 @@ function draw() {
     endShape();
 
     beginShape();
-    strokeWeight(midLo/4);
+    strokeWeight(map(midLo, 0, 255, 1, 30));
     for (var i = 0; i< waveform.length; i++){
       var x = map(i, 0, waveform.length, 0, width);
       var y = map( waveform[i], 0, 255, height/4, 2*height/4);
@@ -136,7 +137,7 @@ function draw() {
     endShape();
 
     beginShape();
-    strokeWeight(midHi/4);
+    strokeWeight(map(midHi, 0, 255, 1, 30));
     for (var i = 0; i< waveform.length; i++){
       var x = map(i, 0, waveform.length, 0, width);
       var y = map( waveform[i], 0, 255, 2*height/4, 3*height/4);
@@ -145,7 +146,7 @@ function draw() {
     endShape();
 
     beginShape();
-    strokeWeight(high/4);
+    strokeWeight(map(high, 0, 255, 1, 30));
     for (var i = 0; i< waveform.length; i++){
       var x = map(i, 0, waveform.length, 0, width);
       var y = map( waveform[i], 0, 255, 3*height/4, height);
@@ -166,9 +167,9 @@ function draw() {
     }
 
     stroke(255);
-    strokeWeight(25+low/35);
+    strokeWeight(25+low/15);
     fill(255,255,255); // spectrum is green
-    for (var i = 0; i < spectrum.length; i+=width/135){
+    for (var i = 0; i < spectrum.length; i+=8){
       var x = map(i, 0, spectrum.length, 0, width);
       var h = 50+map(spectrum[i], 0, 255, 0, height/2);
       line(x, 0, x, h);
@@ -176,10 +177,10 @@ function draw() {
       line(x, height, x, height - h);
       line(width-x, 0, width-x, h);
     }
-
+    console.log(width);
     stroke(0,0, maxx);
     strokeWeight(25);
-    for (var i = 0; i < spectrum.length; i+=width/135){
+    for (var i = 0; i < spectrum.length; i+=8){
       var x = map(i, 0, spectrum.length, 0, width);
       var h = 50+map(spectrum[i], 0, 255, 0, height/2);
       line(x, 0, x, h);
@@ -193,14 +194,33 @@ function draw() {
 
     translate(width/2, height/2);
 
-    for (var angleB = 0; angleB <= 2*PI; angleB += PI/3){
-      polygon((high+(width/6))*cos(angleB), (high+(height/6))*sin(angleB), high/10, 4);
+    push();
+    rotate(frameCount/midHi);
+    for (var angleB = 0; angleB <= 2*PI; angleB += PI/round(high/5)){
+      polygon((high+(width/16))*cos(angleB), (high+(height/16))*sin(angleB), high/16, 3);
     }
+    pop();
+
+    push();
+    rotate(frameCount/midHi);
+    for (var angleB = 0; angleB <= 2*PI; angleB += PI/round(midHi/10)){
+      polygon((midHi+(width/8))*cos(angleB), (midHi+(height/8))*sin(angleB), midHi/8, 5);
+    }
+    pop();
     
-    rotate(frameCount/midLo);
-    for (var angle = 0; angle <= 2*PI; angle += PI/12){
-      ellipse((low+(width/4))*cos(angle), (low+(height/4))*sin(angle), low/10, low/10);
+    push();
+    rotate(frameCount/low);
+    for (var angle = 0; angle <= 2*PI; angle += PI/round(midLo/15)){
+      polygon((midLo+(width/4))*cos(angle), (midLo+(height/4))*sin(angle), midLo/4, 8);
     }
+    pop();
+
+    push();
+    rotate(frameCount/midLo);
+    for (var angle = 0; angle <= 2*PI; angle += PI/round(low/20)){
+      polygon((low+(width/2))*cos(angle), (low+(height/2))*sin(angle), low/2, 20);
+    }
+    pop();
 
     //rotate(frameCount/midHi);
     
