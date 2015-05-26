@@ -8,7 +8,7 @@ var numpressed = 0;
 function preload() {
   text('loading', width/2, height/2);
   soundFormats('ogg', 'mp3');
-  soundFile = loadSound('ten.mp3');
+  soundFile = loadSound('smkr.mp3');
 }
 
 function setup() {
@@ -82,7 +82,7 @@ function draw() {
 
     ellipse(width-map(high, 0, 255, 0, width), 
       map(low, 0, 255, 0, height), cirB, cirB);
-    
+
     var cirA = 2*midHi;
     ellipse(map(low, 0, 255, 0, width), 
       map(high, 0, 255, 0, height), cirA, cirA);
@@ -120,6 +120,13 @@ function draw() {
   } else if (numpressed == 2) {
     var waveform = fft.waveform();
     noFill();
+
+    stroke(255);
+    strokeWeight(20);
+    for (var i = 0; i <= width; i+= width/12){
+      line(random(10,100)+i, 0, random(10,100)+i, height);
+    }
+
     beginShape();
     stroke(255,255,255); // waveform is red
     strokeWeight(map(low, 0, 255, 1, 30));
@@ -162,19 +169,28 @@ function draw() {
   } else if (numpressed == 3) {
     num = 12;
     noStroke();
+
+    fill(0, 0, 0);
+    ellipse(width/2, height/2, midLo*4, midLo*4);
+
+    push();
+    translate(width/2, height/2);
+    rotate(frameCount/low/2);
     fill(0,0,255-maxx);
     for (var i = 0; i <= width; i+= width/num){
       for (var j = 0; j <= height; j+= height/num){
-        ellipse(i+random(10,20), j+random(10,20), high/1.5, high/1.5);
+        rotate(frameCount/low/2);
+        ellipse(i+random(5,15), j+random(5,15), high/2, high/2);
       }
     }
+    pop();
 
     stroke(255);
     strokeWeight(25+low/15);
     fill(255,255,255); // spectrum is green
     for (var i = 0; i < spectrum.length; i+=8){
       var x = map(i, 0, spectrum.length, 0, width);
-      var h = 50+map(spectrum[i], 0, 255, 0, height/2);
+      var h = map(spectrum[i], 0, 255, 0, height/8)*4;
       line(x, 0, x, h);
       line(width-x, height, width-x, height - h);
       line(x, height, x, height - h);
@@ -185,7 +201,7 @@ function draw() {
     strokeWeight(25);
     for (var i = 0; i < spectrum.length; i+=8){
       var x = map(i, 0, spectrum.length, 0, width);
-      var h = 50+map(spectrum[i], 0, 255, 0, height/2);
+      var h = map(spectrum[i], 0, 255, 0, height/8)*4;
       line(x, 0, x, h);
       line(width-x, height, width-x, height - h);
       line(x, height, x, height - h);
@@ -198,28 +214,28 @@ function draw() {
     translate(width/2, height/2);
 
     push();
-    rotate(frameCount/midHi);
+    rotate(frameCount/1/midHi);
     for (var angleB = 0; angleB <= 2*PI; angleB += PI/round(high/5)){
       polygon((high+(width/16))*cos(angleB), (high+(height/16))*sin(angleB), high/16, 3);
     }
     pop();
 
     push();
-    rotate(frameCount/midHi);
+    rotate(frameCount/1/midHi);
     for (var angleB = 0; angleB <= 2*PI; angleB += PI/round(midHi/10)){
       polygon((midHi+(width/8))*cos(angleB), (midHi+(height/8))*sin(angleB), midHi/8, 5);
     }
     pop();
     
     push();
-    rotate(frameCount/low);
+    rotate(frameCount/1/low);
     for (var angle = 0; angle <= 2*PI; angle += PI/round(midLo/15)){
       polygon((midLo+(width/4))*cos(angle), (midLo+(height/4))*sin(angle), midLo/4, 8);
     }
     pop();
 
     push();
-    rotate(frameCount/midLo);
+    rotate(frameCount/1/midLo);
     for (var angle = 0; angle <= 2*PI; angle += PI/round(low/20)){
       polygon((low+(width/2))*cos(angle), (low+(height/2))*sin(angle), low/2, 20);
     }
