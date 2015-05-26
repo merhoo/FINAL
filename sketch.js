@@ -8,7 +8,7 @@ var numpressed = 0;
 function preload() {
   text('loading', width/2, height/2);
   soundFormats('ogg', 'mp3');
-  soundFile = loadSound('fnd.mp3');
+  soundFile = loadSound('body.mp3');
 }
 
 function setup() {
@@ -47,7 +47,10 @@ var maxx = 0;
 
 function draw() {
   this.dofft();
-  background(0, 0, map(10000*volume/1, 0, 10000, 0, 255));
+  maxx = map(10000*volume/1, 0, 10000, 0, 255);
+  background(0, 0, maxx);
+  console.log('back:'+maxx);
+
   if (numpressed == 0){
   translate(width/2, height/2)
   stroke(255);
@@ -64,15 +67,45 @@ function draw() {
   }
   
   } else if (numpressed == 1) {
+    stroke(0);
+    strokeWeight(midLo/20);
+    console.log('1:'+maxx);
+    fill(0, 0, 255-maxx);
+    ellipse(map(low, 0, 255, 0, width), 
+      map(high, 0, 255, 0, height), midHi, midHi);
+    ellipse(width-map(low, 0, 255, 0, width), 
+      height-map(high, 0, 255, 0, height), midHi, midHi);
+    ellipse(width-map(low, 0, 255, 0, width), 
+      map(high, 0, 255, 0, height), midHi, midHi);
+    ellipse(map(low, 0, 255, 0, width), 
+      height-map(high, 0, 255, 0, height), midHi, midHi);
+
+
+
+    ellipse(map(high, 0, 255, 0, width), 
+      map(low, 0, 255, 0, height), height/4, height/4);
+
+    ellipse(width-map(high, 0, 255, 0, width), 
+      height-map(low, 0, 255, 0, height), height/4, height/4);
+
+    ellipse(map(high, 0, 255, 0, width), 
+      height-map(low, 0, 255, 0, height), height/4, height/4);
+
+    ellipse(width-map(high, 0, 255, 0, width), 
+      map(low, 0, 255, 0, height), height/4, height/4);
+
+
     stroke(255);
+
+
     
-    strokeWeight(map(low, 0, 255, 1, 100));
-    for (var i = 0; i <= width; i+= (width/map(midLo, 0, 255, 2, 15))){
+    strokeWeight(map(low, 0, 255, 1, 50));
+    for (var i = 0; i <= width; i+= (width/map(midLo, 0, 255, 6, 16))){
       line(i, 0, i, height);
     }
 
-    strokeWeight(map(high, 0, 255, 1, 100));
-    for (var j = 0; j <= height; j+= (height/map(midHi, 0, 255, 2, 15))){
+    strokeWeight(map(high, 0, 255, 1, 50));
+    for (var j = 0; j <= height; j+= (height/map(midHi, 0, 255, 6, 16))){
       line(0, j, width, j);
     }
 
@@ -95,24 +128,36 @@ function draw() {
     }
     endShape();
   } else if (numpressed == 3) {
+    num = 12;
+    noStroke();
+    fill(0,0,255-maxx);
+    for (var i = 0; i <= width; i+= width/num){
+      for (var j = 0; j <= height; j+= height/num){
+        ellipse(i+random(10,20), j+random(10,20), high/1.5, high/1.5);
+      }
+    }
+
     stroke(255);
-    strokeWeight(15+low/35);
+    strokeWeight(20+low/35);
     fill(255,255,255); // spectrum is green
     for (var i = 0; i < spectrum.length; i+=16){
       var x = map(i, 0, spectrum.length, 0, width);
-      var h = map(spectrum[i], 0, 255, 0, height/2);
+      var h = 50+map(spectrum[i], 0, 255, 0, height/2);
       line(x, 0, x, h);
       line(width-x, height, width-x, height - h);
       line(x, height, x, height - h);
       line(width-x, 0, width-x, h);
-      //line(x, 0, x, h);
-      //line(width-x, height, width-x, height - spectrum[i]*10);
-      //line(x, 0, x, spectrum[i]*10);
-      //line(width-x, 0, width-x, spectrum[i]*10);
+    }
 
-      //var x = map(i, 0, spectrum.length, 0, width/2);
-      //var h = -height/2 + map(spectrum[i], 0, 255, height/2, 0);
-      //rect(x, height, width/2 / spectrum.length, h )
+    stroke(0,0, maxx);
+    strokeWeight(15);
+    for (var i = 0; i < spectrum.length; i+=16){
+      var x = map(i, 0, spectrum.length, 0, width);
+      var h = 50+map(spectrum[i], 0, 255, 0, height/2);
+      line(x, 0, x, h);
+      line(width-x, height, width-x, height - h);
+      line(x, height, x, height - h);
+      line(width-x, 0, width-x, h);
     }
   } else if (numpressed == 4) {
     noStroke();
