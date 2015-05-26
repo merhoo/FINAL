@@ -8,7 +8,7 @@ var numpressed = 0;
 function preload() {
   text('loading', width/2, height/2);
   soundFormats('ogg', 'mp3');
-  soundFile = loadSound('niw.mp3');
+  soundFile = loadSound('ten.mp3');
 }
 
 function setup() {
@@ -69,16 +69,6 @@ function draw() {
     stroke(0);
     strokeWeight(midLo/20);
     fill(0, 0, 255-maxx);
-    var cirA = 2*midHi;
-    ellipse(map(low, 0, 255, 0, width), 
-      map(high, 0, 255, 0, height), cirA, cirA);
-    ellipse(width-map(low, 0, 255, 0, width), 
-      height-map(high, 0, 255, 0, height), cirA, cirA);
-    ellipse(width-map(low, 0, 255, 0, width), 
-      map(high, 0, 255, 0, height), cirA, cirA);
-    ellipse(map(low, 0, 255, 0, width), 
-      height-map(high, 0, 255, 0, height), cirA, cirA);
-
 
     var cirB = height/2;
     ellipse(map(high, 0, 255, 0, width), 
@@ -92,6 +82,19 @@ function draw() {
 
     ellipse(width-map(high, 0, 255, 0, width), 
       map(low, 0, 255, 0, height), cirB, cirB);
+    
+    var cirA = 2*midHi;
+    ellipse(map(low, 0, 255, 0, width), 
+      map(high, 0, 255, 0, height), cirA, cirA);
+    ellipse(width-map(low, 0, 255, 0, width), 
+      height-map(high, 0, 255, 0, height), cirA, cirA);
+    ellipse(width-map(low, 0, 255, 0, width), 
+      map(high, 0, 255, 0, height), cirA, cirA);
+    ellipse(map(low, 0, 255, 0, width), 
+      height-map(high, 0, 255, 0, height), cirA, cirA);
+
+
+    
 
 
     stroke(255);
