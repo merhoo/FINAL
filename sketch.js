@@ -8,7 +8,7 @@ var numpressed = 0;
 function preload() {
   text('loading', width/2, height/2);
   soundFormats('ogg', 'mp3');
-  soundFile = loadSound('body.mp3');
+  soundFile = loadSound('niw.mp3');
 }
 
 function setup() {
@@ -49,7 +49,6 @@ function draw() {
   this.dofft();
   maxx = map(10000*volume/1, 0, 10000, 0, 255);
   background(0, 0, maxx);
-  console.log('back:'+maxx);
 
   if (numpressed == 0){
   translate(width/2, height/2)
@@ -69,7 +68,6 @@ function draw() {
   } else if (numpressed == 1) {
     stroke(0);
     strokeWeight(midLo/20);
-    console.log('1:'+maxx);
     fill(0, 0, 255-maxx);
     ellipse(map(low, 0, 255, 0, width), 
       map(high, 0, 255, 0, height), midHi, midHi);
@@ -120,13 +118,43 @@ function draw() {
     noFill();
     beginShape();
     stroke(255,255,255); // waveform is red
-    strokeWeight(20);
+    strokeWeight(low/4);
     for (var i = 0; i< waveform.length; i++){
       var x = map(i, 0, waveform.length, 0, width);
-      var y = map( waveform[i], 0, 255, 0, height);
+      var y = map( waveform[i], 0, 255, 0, height/4);
       vertex(x,y);
     }
     endShape();
+
+    beginShape();
+    strokeWeight(midLo/4);
+    for (var i = 0; i< waveform.length; i++){
+      var x = map(i, 0, waveform.length, 0, width);
+      var y = map( waveform[i], 0, 255, height/4, 2*height/4);
+      vertex(x,y);
+    }
+    endShape();
+
+    beginShape();
+    strokeWeight(midHi/4);
+    for (var i = 0; i< waveform.length; i++){
+      var x = map(i, 0, waveform.length, 0, width);
+      var y = map( waveform[i], 0, 255, 2*height/4, 3*height/4);
+      vertex(x,y);
+    }
+    endShape();
+
+    beginShape();
+    strokeWeight(high/4);
+    for (var i = 0; i< waveform.length; i++){
+      var x = map(i, 0, waveform.length, 0, width);
+      var y = map( waveform[i], 0, 255, 3*height/4, height);
+      vertex(x,y);
+    }
+    endShape();
+    
+
+
   } else if (numpressed == 3) {
     num = 12;
     noStroke();
@@ -138,9 +166,9 @@ function draw() {
     }
 
     stroke(255);
-    strokeWeight(20+low/35);
+    strokeWeight(25+low/35);
     fill(255,255,255); // spectrum is green
-    for (var i = 0; i < spectrum.length; i+=16){
+    for (var i = 0; i < spectrum.length; i+=width/135){
       var x = map(i, 0, spectrum.length, 0, width);
       var h = 50+map(spectrum[i], 0, 255, 0, height/2);
       line(x, 0, x, h);
@@ -150,8 +178,8 @@ function draw() {
     }
 
     stroke(0,0, maxx);
-    strokeWeight(15);
-    for (var i = 0; i < spectrum.length; i+=16){
+    strokeWeight(25);
+    for (var i = 0; i < spectrum.length; i+=width/135){
       var x = map(i, 0, spectrum.length, 0, width);
       var h = 50+map(spectrum[i], 0, 255, 0, height/2);
       line(x, 0, x, h);
