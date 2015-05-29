@@ -8,7 +8,7 @@ var numpressed = 0;
 function preload() {
   text('loading', width/2, height/2);
   soundFormats('ogg', 'mp3');
-  soundFile = loadSound('smkr.mp3');
+  soundFile = loadSound('tm.mp3');
 }
 
 function setup() {
@@ -216,28 +216,28 @@ function draw() {
     push();
     rotate(frameCount/1/midHi);
     for (var angleB = 0; angleB <= 2*PI; angleB += PI/round(high/5)){
-      polygon((high+(width/16))*cos(angleB), (high+(height/16))*sin(angleB), high/16, 3);
+      polygon((high+(width/28))*cos(angleB), (high+(height/24))*sin(angleB), high/16, 3);
     }
     pop();
 
     push();
-    rotate(frameCount/1/midHi);
+    rotate(frameCount/1/high);
     for (var angleB = 0; angleB <= 2*PI; angleB += PI/round(midHi/10)){
-      polygon((midHi+(width/8))*cos(angleB), (midHi+(height/8))*sin(angleB), midHi/8, 5);
+      polygon((midHi+(width/16))*cos(angleB), (midHi+(height/12))*sin(angleB), midHi/8, 5);
     }
     pop();
     
     push();
     rotate(frameCount/1/low);
     for (var angle = 0; angle <= 2*PI; angle += PI/round(midLo/15)){
-      polygon((midLo+(width/4))*cos(angle), (midLo+(height/4))*sin(angle), midLo/4, 8);
+      polygon((midLo+(width/8))*cos(angle), (midLo+(height/6))*sin(angle), midLo/4, 8);
     }
     pop();
 
     push();
     rotate(frameCount/1/midLo);
     for (var angle = 0; angle <= 2*PI; angle += PI/round(low/20)){
-      polygon((low+(width/2))*cos(angle), (low+(height/2))*sin(angle), low/2, 20);
+      polygon((low+(width/4))*cos(angle), (low+(height/3))*sin(angle), low/3, 20);
     }
     pop();
 
