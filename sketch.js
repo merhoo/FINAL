@@ -3,15 +3,31 @@ var amplitude;
 var fft, spectrum, low, midLo, midHi, high;
 var volume = 0;
 
+var client_id = '3018af38063abcf6a38748e9ad55b455';
+var url = 'https://soundcloud.com/shhsecretsongs/shh020-diveo-summer-trees';
+var sound;
+
 var numpressed = 0;
 
-function preload() {
-  text('loading', width/2, height/2);
-  soundFormats('ogg', 'mp3');
-  soundFile = loadSound('tm.mp3');
+SC.initialize({
+  client_id: '3018af38063abcf6a38748e9ad55b455',
+  redirect_uri: 'http://localhost:8000/callback.html'
+});
+
+SC.get( '/resolve', { url: url }, function( data ){
+      sound = data; 
+  });
+
+var sketch = function( s ){
+  s.preload = function() {
+  
+text('loading', width/2, height/2);
+soundFile = loadSound(sound.stream_url + '?client_id=' + client_id);
+    //soundFormats('ogg', 'mp3');
+  
 }
 
-function setup() {
+s.setup = function() {
   soundFile.play();
   soundFile.rate(1);
 
@@ -22,13 +38,17 @@ function setup() {
   background(0);
 }
 
-function keyPressed() {
+
+
+
+
+s.keyPressed = function() {
   if (keyCode >= 48 && keyCode <= 57){
     numpressed = keyCode - 48;
   }
 }
 
-function dofft(){
+s.dofft = function(){
   if (soundFile.isPlaying()) {
     // get volume from the amplitude process
     volume = amplitude.getLevel();
@@ -45,17 +65,17 @@ function dofft(){
 
 var maxx = 0;
 
-function draw() {
+s.draw = function() {
   this.dofft();
   maxx = map(10000*volume/1, 0, 10000, 0, 255);
   background(0, 0, maxx);
 
   if (numpressed == 0){
-  translate(width/2, height/2)
-  stroke(255);
+    translate(width/2, height/2)
+    stroke(255);
 
 
-  rotate(frameCount/midHi);
+    rotate(frameCount/midHi);
   /*fill(0, 0, high);
   strokeWeight(midHi/5);
   rect(0, 0, high, high);*/
@@ -65,69 +85,69 @@ function draw() {
     polygon(0, 0, (low/2)*i, map(high, 0, 255, 3, 9));
   }
   
-  } else if (numpressed == 1) {
-    stroke(0);
-    strokeWeight(midLo/20);
-    fill(0, 0, 255-maxx);
+} else if (numpressed == 1) {
+  stroke(0);
+  strokeWeight(midLo/20);
+  fill(0, 0, 255-maxx);
 
-    var cirB = height/2;
-    ellipse(map(high, 0, 255, 0, width), 
-      map(low, 0, 255, 0, height), cirB, cirB);
+  var cirB = height/2;
+  ellipse(map(high, 0, 255, 0, width), 
+    map(low, 0, 255, 0, height), cirB, cirB);
 
-    ellipse(width-map(high, 0, 255, 0, width), 
-      height-map(low, 0, 255, 0, height), cirB, cirB);
+  ellipse(width-map(high, 0, 255, 0, width), 
+    height-map(low, 0, 255, 0, height), cirB, cirB);
 
-    ellipse(map(high, 0, 255, 0, width), 
-      height-map(low, 0, 255, 0, height), cirB, cirB);
+  ellipse(map(high, 0, 255, 0, width), 
+    height-map(low, 0, 255, 0, height), cirB, cirB);
 
-    ellipse(width-map(high, 0, 255, 0, width), 
-      map(low, 0, 255, 0, height), cirB, cirB);
+  ellipse(width-map(high, 0, 255, 0, width), 
+    map(low, 0, 255, 0, height), cirB, cirB);
 
-    var cirA = 2*midHi;
-    ellipse(map(low, 0, 255, 0, width), 
-      map(high, 0, 255, 0, height), cirA, cirA);
-    ellipse(width-map(low, 0, 255, 0, width), 
-      height-map(high, 0, 255, 0, height), cirA, cirA);
-    ellipse(width-map(low, 0, 255, 0, width), 
-      map(high, 0, 255, 0, height), cirA, cirA);
-    ellipse(map(low, 0, 255, 0, width), 
-      height-map(high, 0, 255, 0, height), cirA, cirA);
-
-
-    
+  var cirA = 2*midHi;
+  ellipse(map(low, 0, 255, 0, width), 
+    map(high, 0, 255, 0, height), cirA, cirA);
+  ellipse(width-map(low, 0, 255, 0, width), 
+    height-map(high, 0, 255, 0, height), cirA, cirA);
+  ellipse(width-map(low, 0, 255, 0, width), 
+    map(high, 0, 255, 0, height), cirA, cirA);
+  ellipse(map(low, 0, 255, 0, width), 
+    height-map(high, 0, 255, 0, height), cirA, cirA);
 
 
-    stroke(255);
 
 
-    
-    strokeWeight(map(low, 0, 255, 1, 30));
-    for (var i = 0; i <= width; i+= (width/map(midLo, 0, 255, 6, 16))){
-      line(i, 0, i, height);
-    }
 
-    strokeWeight(map(high, 0, 255, 1, 30));
-    for (var j = 0; j <= height; j+= (height/map(midHi, 0, 255, 6, 16))){
-      line(0, j, width, j);
-    }
+  stroke(255);
+
+
+
+  strokeWeight(map(low, 0, 255, 1, 30));
+  for (var i = 0; i <= width; i+= (width/map(midLo, 0, 255, 6, 16))){
+    line(i, 0, i, height);
+  }
+
+  strokeWeight(map(high, 0, 255, 1, 30));
+  for (var j = 0; j <= height; j+= (height/map(midHi, 0, 255, 6, 16))){
+    line(0, j, width, j);
+  }
 
     /*noFill();
     for (var i = 1; i <= 20; i+=4){
       rect(width/2 - ((low/4)*i)/2, 
         height/2 - ((high/4)*i) /2, (low/4)*i, (high/4)*i );
-    }*/
+}*/
 
-  } else if (numpressed == 2) {
-    var waveform = fft.waveform();
-    noFill();
+} else if (numpressed == 2) {
+  var waveform = fft.waveform();
+  noFill();
 
-    stroke(255);
-    strokeWeight(20);
-    for (var i = 0; i <= width; i+= width/12){
-      line(random(10,100)+i, 0, random(10,100)+i, height);
-    }
+  stroke(255);
+  strokeWeight(20);
+  for (var i = 0; i <= width; i+= width/12){
+    line(random(10,100)+i, 0, random(10,100)+i, height);
+  }
 
-    beginShape();
+  beginShape();
     stroke(255,255,255); // waveform is red
     strokeWeight(map(low, 0, 255, 1, 30));
     for (var i = 0; i< waveform.length; i++){
@@ -259,7 +279,7 @@ function draw() {
 
 
 
-function polygon(x, y, radius, npoints) {
+s.polygon = function(x, y, radius, npoints) {
   var angle = TWO_PI / npoints;
   beginShape();
   for (var a = 0; a < TWO_PI; a += angle) {
@@ -269,4 +289,7 @@ function polygon(x, y, radius, npoints) {
   }
   endShape(CLOSE);
 }
+
+}
+
 
