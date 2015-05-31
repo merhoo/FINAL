@@ -117,7 +117,7 @@ var sketch = function(p) {
             p.stroke(255);
             p.strokeWeight(20);
             for (var i = 0; i <= p.width; i += p.width / 12) {
-                p.line(random(10, 100) + i, 0, random(10, 100) + i, p.height);
+                p.line(p.random(10, 100) + i, 0, p.random(10, 100) + i, p.height);
             }
 
             p.beginShape();
@@ -170,7 +170,7 @@ var sketch = function(p) {
             for (var i = 0; i <= p.width; i += p.width / num) {
                 for (var j = 0; j <= p.height; j += p.height / num) {
                     p.rotate(p.frameCount / low / 2);
-                    p.ellipse(i + random(5, 15), j + random(5, 15), high / 2, high / 2);
+                    p.ellipse(i + p.random(5, 15), j + p.random(5, 15), high / 2, high / 2);
                 }
             }
             p.pop();
@@ -199,7 +199,7 @@ var sketch = function(p) {
             }
         } else if (numpressed == 4) {
             p.noStroke();
-            p.angleMode(RADIANS);
+            p.angleMode(p.RADIANS);
 
             p.translate(p.width / 2, p.height / 2);
 
