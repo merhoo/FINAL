@@ -249,8 +249,8 @@ var sketch = function(p) {
         var angle = p.TWO_PI / npoints;
         p.beginShape();
         for (var a = 0; a < p.TWO_PI; a += angle) {
-            var sx = x + cos(a) * radius;
-            var sy = y + sin(a) * radius;
+            var sx = x + p.cos(a) * radius;
+            var sy = y + p.sin(a) * radius;
             p.vertex(sx, sy);
         }
         p.endShape(CLOSE);
