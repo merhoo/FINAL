@@ -246,9 +246,9 @@ var sketch = function(p) {
     };
 
     var polygon = function(x, y, radius, npoints) {
-        var angle = TWO_PI / npoints;
+        var angle = p.TWO_PI / npoints;
         p.beginShape();
-        for (var a = 0; a < TWO_PI; a += angle) {
+        for (var a = 0; a < p.TWO_PI; a += angle) {
             var sx = x + cos(a) * radius;
             var sy = y + sin(a) * radius;
             p.vertex(sx, sy);
