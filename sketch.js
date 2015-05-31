@@ -253,7 +253,7 @@ var sketch = function(p) {
             var sy = y + p.sin(a) * radius;
             p.vertex(sx, sy);
         }
-        p.endShape(CLOSE);
+        p.endShape(p.CLOSE);
     };
 };
 
