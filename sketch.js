@@ -4,7 +4,7 @@ var volume = 0;
 var maxx = 0;
 
 var client_id = '3018af38063abcf6a38748e9ad55b455';
-var url = 'https://soundcloud.com/shhsecretsongs/shh020-diveo-summer-trees';
+var url = 'https://soundcloud.com/dirgethexvii/eden';
 var sound, soundFile;
 
 var numpressed = 0;
@@ -53,7 +53,7 @@ var sketch = function(p) {
         p.background(0, 0, maxx);
 
         if (numpressed == 0) {
-            p.translate(width / 2, height / 2)
+            p.translate(p.width / 2, p.height / 2)
             p.stroke(255);
 
             p.rotate(frameCount / midHi);
