@@ -3,6 +3,7 @@ var fft, spectrum, low, midLo, midHi, high;
 var volume = 0;
 var maxx = 0;
 
+//yeah it works!
 var client_id = '3018af38063abcf6a38748e9ad55b455';
 var url = 'https://soundcloud.com/dirgethexvii/eden';
 var sound, soundFile;
