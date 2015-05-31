@@ -186,7 +186,7 @@ var sketch = function(p) {
                 p.line(x, p.height, x, p.height - h);
                 p.line(p.width - x, 0, p.width - x, h);
             }
-            console.log(p.width);
+            
             p.stroke(0, 0, maxx);
             p.strokeWeight(25);
             for (var i = 0; i < spectrum.length; i += 8) {
@@ -205,28 +205,28 @@ var sketch = function(p) {
 
             p.push();
             p.rotate(p.frameCount / 1 / midHi);
-            for (var angleB = 0; angleB <= 2 * PI; angleB += PI / round(high / 5)) {
+            for (var angleB = 0; angleB <= 2 * p.PI; angleB += p.PI / round(high / 5)) {
                 polygon((high + (p.width / 28)) * cos(angleB), (high + (p.height / 24)) * sin(angleB), high / 16, 3);
             }
             p.pop();
 
             p.push();
             p.rotate(p.frameCount / 1 / high);
-            for (var angleB = 0; angleB <= 2 * PI; angleB += PI / round(midHi / 10)) {
+            for (var angleB = 0; angleB <= 2 * p.PI; angleB += p.PI / round(midHi / 10)) {
                 polygon((midHi + (p.width / 16)) * cos(angleB), (midHi + (p.height / 12)) * sin(angleB), midHi / 8, 5);
             }
             p.pop();
 
             p.push();
             p.rotate(p.frameCount / 1 / low);
-            for (var angle = 0; angle <= 2 * PI; angle += PI / round(midLo / 15)) {
+            for (var angle = 0; angle <= 2 * p.PI; angle += p.PI / round(midLo / 15)) {
                 polygon((midLo + (p.width / 8)) * cos(angle), (midLo + (p.height / 6)) * sin(angle), midLo / 4, 8);
             }
             p.pop();
 
             p.push();
             p.rotate(p.frameCount / 1 / midLo);
-            for (var angle = 0; angle <= 2 * PI; angle += PI / round(low / 20)) {
+            for (var angle = 0; angle <= 2 * p.PI; angle += p.PI / round(low / 20)) {
                 polygon((low + (p.width / 4)) * cos(angle), (low + (p.height / 3)) * sin(angle), low / 3, 20);
             }
             p.pop();
