@@ -46,7 +46,7 @@ var sketch = function(p) {
             if(!changingURL) play();
 
 
-        });n
+        });
         
         
     }
