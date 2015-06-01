@@ -50,6 +50,7 @@ var sketch = function(p) {
     }
 
     var falseC = function(){
+        console.log(soundFile.isLoaded());
         changingURL = false;
     }
 
@@ -59,9 +60,6 @@ var sketch = function(p) {
             soundFile.rate(1);
             amplitude = new p5.Amplitude();
             fft = new p5.FFT(); 
-        } else {
-            play();
-            console.log("WOW");
         }
             
     }
