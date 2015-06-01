@@ -16,14 +16,12 @@ var sketch = function(p) {
 
     p.preload = function() {
         soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id);
-        soundFile.play();
-        soundFile.rate(1);
         //soundFormats('ogg', 'mp3');
     };
 
     p.setup = function() {
-        
-
+        soundFile.play();
+        soundFile.rate(1);
         amplitude = new p5.Amplitude();
         fft = new p5.FFT();
 
@@ -45,6 +43,7 @@ var sketch = function(p) {
         SC.get('/resolve.json', { url: newUrl }, function(data) {
             sound = data;
             p.preload();
+            p.setup();
         });
         
     }
