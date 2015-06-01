@@ -50,16 +50,15 @@ var sketch = function(p) {
     }
 
     var falseC = function(){
-        play(soundFileN);
+        soundFile = soundFileN;
         changingURL = false;
     }
 
-    var play = function(sf){
-            sf.play();
-            sf.rate(1);
+    var play = function(){
+            soundFile.play();
+            soundFile.rate(1);
             amplitude = new p5.Amplitude();
             fft = new p5.FFT(); 
-            soundFile = sf;
     }
 
     var dofft = function() {
