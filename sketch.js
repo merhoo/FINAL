@@ -12,10 +12,12 @@ var changingURL = false;
 
 var numpressed = 0;
 var myp5;
+var localSketch;
 
 var sketch = function(p) {
 
     p.preload = function() {
+        localSketch = this;
         soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id);
         //soundFormats('ogg', 'mp3');
     };
@@ -31,7 +33,7 @@ var sketch = function(p) {
             numpressed = p.keyCode - 48;
         }
         if (p.keyCode == 32){
-            changeURL(url2);
+            //changeURL(url2);
         }
     };
 
@@ -41,7 +43,7 @@ var sketch = function(p) {
             soundFile.stop();
             soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id, play);
         });
-    }
+    } 
 
     var play = function(){
             soundFile.play();
@@ -286,7 +288,7 @@ SC.get('/resolve.json', { url: url }, function(data) {
 $(document).ready(function() {
 
     $('#songSubmit').click(function() {
-        changeURL($('#songURL').value());
+        localSketch.changeURL($('#songURL').value());
     });
 
 });
