@@ -21,11 +21,7 @@ var sketch = function(p) {
     };
 
     p.setup = function() {
-        soundFile.play();
-        soundFile.rate(1);
-        amplitude = new p5.Amplitude();
-        fft = new p5.FFT();
-
+        play();
         p.createCanvas(window.innerWidth, window.innerHeight);
         p.background(0);
     };
@@ -42,15 +38,28 @@ var sketch = function(p) {
     };
 
     var changeURL = function(newUrl){
-        changingURL = true;
-        soundFile.stop();
         SC.get('/resolve.json', { url: newUrl }, function(data) {
             sound = data;
-            console.log(sound.stream_url);
-            soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id, p.setup());
-        });
-        changingURL = false;
+            changingURL = true;
+            soundFile.stop();
+            soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id, false());
+            if(!changingURL) play();
+
+
+        });n
         
+        
+    }
+
+    var false = function(){
+        changingURL = false;
+    }
+
+    var play = function(){
+        soundFile.play();
+        soundFile.rate(1);
+        amplitude = new p5.Amplitude();
+        fft = new p5.FFT();
     }
 
     var dofft = function() {
