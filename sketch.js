@@ -56,7 +56,7 @@ var sketch = function(p) {
     }
 
     var dofft = function() {
-        if (soundFile.isPlaying() && !changingURL) {
+        if (soundFile.isPlaying()) {
             // get volume from the amplitude process
             volume = amplitude.getLevel();
 
