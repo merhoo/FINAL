@@ -41,7 +41,7 @@ var sketch = function(p) {
     };
 
     var changeURL = function(newUrl){
-        SC.get('/resolve.json', { newUrl: newUrl }, function(data) {
+        SC.get('/resolve.json', { url: newUrl }, function(data) {
             sound = data;
             console.log(sound.stream_url);
         });
