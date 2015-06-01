@@ -41,8 +41,6 @@ var sketch = function(p) {
             soundFile.stop();
             soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id, play);
         });
-        
-        
     }
 
     var play = function(){
@@ -283,4 +281,12 @@ SC.initialize({
 SC.get('/resolve.json', { url: url }, function(data) {
     sound = data;
     myp5 = new p5(sketch);
+});
+
+$(document).ready(function() {
+
+    $('#songSubmit').click(function() {
+        changeURL($('#songURL').value());
+    });
+
 });
