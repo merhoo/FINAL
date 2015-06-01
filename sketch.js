@@ -17,7 +17,7 @@ var sketch = function(p) {
     p.preload = function() {
         soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id);
         //soundFormats('ogg', 'mp3');
-        console.log('done');
+        return true;
     };
 
     p.setup = function() {
@@ -40,10 +40,16 @@ var sketch = function(p) {
         }
     };
 
+    var urlbool = false;
     var changeURL = function(newUrl){
         SC.get('/resolve.json', { url: newUrl }, function(data) {
             sound = data;
-            p.preload();
+            if(p.preload()){
+                soundFile.play();
+                soundFile.rate(1);
+                amplitude = new p5.Amplitude();
+                fft = new p5.FFT();
+            };
         });
         
     }
