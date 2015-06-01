@@ -6,12 +6,14 @@ var maxx = 0;
 //yeah it works!
 var client_id = '3018af38063abcf6a38748e9ad55b455';
 var url = 'https://soundcloud.com/dirgethexvii/eden';
+var url2 = 'https://soundcloud.com/bedjams/maxo-mediumrare-bedjams-remix';
 var sound, soundFile;
 
 var numpressed = 0;
 var myp5;
 
 var sketch = function(p) {
+
     p.preload = function() {
         soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id);
         //soundFormats('ogg', 'mp3');
@@ -32,7 +34,24 @@ var sketch = function(p) {
         if (p.keyCode >= 48 && p.keyCode <= 57) {
             numpressed = p.keyCode - 48;
         }
+        if (p.keyCode == 32){
+            changeURL(url2);
+            //change song!
+        }
     };
+
+    var changeURL = function(newUrl){
+        SC.get('/resolve.json', { newUrl: newUrl }, function(data) {
+            sound = data;
+            soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id);
+            soundFile.play();
+            soundFile.rate(1);
+
+            amplitude = new p5.Amplitude();
+            fft = new p5.FFT();
+        });
+        
+    }
 
     var dofft = function() {
         if (soundFile.isPlaying()) {
