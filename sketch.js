@@ -44,6 +44,8 @@ var sketch = function(p) {
         SC.get('/resolve.json', { url: newUrl }, function(data) {
             sound = data;
             soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id);
+            soundFile.play();
+        soundFile.rate(1);
         });
         
     }
