@@ -42,16 +42,10 @@ var sketch = function(p) {
             sound = data;
             changingURL = true;
             soundFile.stop();
-            soundFileN = p.loadSound(sound.stream_url + '?client_id=' + client_id, falseC());
-            console.log(soundFile.isLoaded());
+            soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id, play);
         });
         
         
-    }
-
-    var falseC = function(){
-        soundFile = soundFileN;
-        changingURL = false;
     }
 
     var play = function(){
