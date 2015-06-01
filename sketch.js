@@ -43,7 +43,7 @@ var sketch = function(p) {
     var changeURL = function(newUrl){
         SC.get('/resolve.json', { url: newUrl }, function(data) {
             sound = data;
-            preload();
+            p.preload();
         });
         
     }
