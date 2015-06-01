@@ -43,12 +43,7 @@ var sketch = function(p) {
     var changeURL = function(newUrl){
         SC.get('/resolve.json', { newUrl: newUrl }, function(data) {
             sound = data;
-            soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id);
-            soundFile.play();
-            soundFile.rate(1);
-
-            amplitude = new p5.Amplitude();
-            fft = new p5.FFT();
+            p.preload();
         });
         
     }
