@@ -37,13 +37,14 @@ var sketch = function(p) {
         if (p.keyCode == 32){
             changeURL(url2);
             //change song!
+            console.log("h");
         }
     };
 
     var changeURL = function(newUrl){
         changingURL = true;
         soundFile.stop();
-        SC.get('/resolve.json', { url: newUrl }, function(data) {
+        SC.get('/resolve.json', { newUrl: newUrl }, function(data) {
             sound = data;
             soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id, p.setup());
         });
