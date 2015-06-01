@@ -43,9 +43,7 @@ var sketch = function(p) {
             changingURL = true;
             soundFile.stop();
             soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id, falseC());
-            if(soundFile.isLoaded()) play();
-
-
+            play();
         });
         
         
@@ -56,10 +54,16 @@ var sketch = function(p) {
     }
 
     var play = function(){
-        soundFile.play();
-        soundFile.rate(1);
-        amplitude = new p5.Amplitude();
-        fft = new p5.FFT();
+        if(soundFile.isLoaded()){
+            soundFile.play();
+            soundFile.rate(1);
+            amplitude = new p5.Amplitude();
+            fft = new p5.FFT(); 
+        } else {
+            play();
+            console.log("WOW");
+        }
+            
     }
 
     var dofft = function() {
