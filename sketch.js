@@ -42,7 +42,7 @@ var sketch = function(p) {
             sound = data;
             changingURL = true;
             soundFile.stop();
-            soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id, false());
+            soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id, falseC());
             if(!changingURL) play();
 
 
@@ -51,7 +51,7 @@ var sketch = function(p) {
         
     }
 
-    var false = function(){
+    var falseC = function(){
         changingURL = false;
     }
 
