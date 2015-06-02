@@ -281,7 +281,7 @@ SC.initialize({
     client_id: '3018af38063abcf6a38748e9ad55b455'
 });
 
-SC.get('/resolve.json', { url: urls[0] }, function(data) {
+SC.get('/resolve.json', { url: urls[0]}, function(data) {
     sound = data;
     myp5 = new p5(sketch);
 });
