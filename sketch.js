@@ -33,6 +33,7 @@ var sketch = function(p) {
             numpressed = p.keyCode - 48;
         }
         if (p.keyCode == 32){
+            console.log(1+offset);
             changeURL(urls[1+offset]);
         }
     };
