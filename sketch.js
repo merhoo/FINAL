@@ -5,8 +5,7 @@ var maxx = 0;
 
 //yeah it works!
 var client_id = '3018af38063abcf6a38748e9ad55b455';
-var url = 'https://soundcloud.com/tennysonmusic/smother-with-mothica';
-var url2 = 'https://soundcloud.com/dirgethexvii/eden';
+var offset = 0;
 var sound, soundFile, soundFileN;
 var changingURL = false;
 
@@ -33,7 +32,7 @@ var sketch = function(p) {
             numpressed = p.keyCode - 48;
         }
         if (p.keyCode == 32){
-            changeURL(url2);
+            changeURL(urls[1+offset]);
         }
     };
 
@@ -42,6 +41,7 @@ var sketch = function(p) {
             sound = data;
             soundFile.stop();
             soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id, play);
+            offset++;
         });
     } 
 
@@ -280,7 +280,7 @@ SC.initialize({
     client_id: '3018af38063abcf6a38748e9ad55b455'
 });
 
-SC.get('/resolve.json', { url: url }, function(data) {
+SC.get('/resolve.json', { url: urls[0] }, function(data) {
     sound = data;
     myp5 = new p5(sketch);
 });
@@ -292,3 +292,4 @@ $(document).ready(function() {
     });
 
 });*/
++
