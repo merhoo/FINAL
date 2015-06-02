@@ -5,7 +5,7 @@ var maxx = 0;
 
 //yeah it works!
 var client_id = '3018af38063abcf6a38748e9ad55b455';
-//var urls = ['https://soundcloud.com/dirgethexvii/eden', 'https://soundcloud.com/tennysonmusic/smother-with-mothica', 'https://soundcloud.com/madeinheights/slow-burn'];
+var urls = ['https://soundcloud.com/dirgethexvii/eden', 'https://soundcloud.com/tennysonmusic/smother-with-mothica', 'https://soundcloud.com/madeinheights/slow-burn'];
 var offset = 0;
 var sound, soundFile, soundFileN;
 var changingURL = false;
@@ -293,4 +293,3 @@ $(document).ready(function() {
     });
 
 });*/
-+
