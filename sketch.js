@@ -5,7 +5,7 @@ var maxx = 0;
 
 //yeah it works!
 var client_id = '3018af38063abcf6a38748e9ad55b455';
-var url = 'https://soundcloud.com/madeinheights/slow-burn';
+var url = 'https://soundcloud.com/moonbounce/fool';
 var url2 = 'https://soundcloud.com/dirgethexvii/eden';
 var sound, soundFile, soundFileN;
 var changingURL = false;
