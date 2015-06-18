@@ -38,16 +38,24 @@ var sketch = function(p) {
             numpressed = p.keyCode - 48;
         }
         if (p.keyCode == 32){
-            changeURL(urls[1+offset]);
+            increment();
+            changeURL(urls[offset]);
         }
     };
+
+    var increment = function(){
+        if (offset == urls.length - 1){
+            offset == 0;
+        } else {
+            offset++;
+        }
+    }
 
     var changeURL = function(newUrl){
         SC.get('/resolve.json', { url: newUrl }, function(data) {
             sound = data;
             soundFile.stop();
             soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id, play);
-            offset++;
         });
     } 
 
@@ -57,6 +65,8 @@ var sketch = function(p) {
             amplitude = new p5.Amplitude();
             fft = new p5.FFT(); 
     }
+
+    var once = true;
 
     var dofft = function() {
         if (soundFile.isPlaying()) {
@@ -69,6 +79,13 @@ var sketch = function(p) {
             midLo = fft.getEnergy('lowMid');
             midHi = fft.getEnergy('mid');
             high = fft.getEnergy('highMid');
+        } else {
+            if (once){
+            increment();
+            changeURL(urls[offset]);
+            once = false;
+            setTimeout(function(){ once = true; }, 3000);
+            }
         }
     };
 
