@@ -38,24 +38,24 @@ var sketch = function(p) {
             numpressed = p.keyCode - 48;
         }
         if (p.keyCode == 32){
-            increment();
-            changeURL(urls[offset]);
+            changeURL(urls[1+offset]);
         }
     };
 
-    var increment = function(){
+    /*var increment = function(){
         if (offset == urls.length - 1){
             offset == 0;
         } else {
             offset++;
         }
-    }
+    }*/
 
     var changeURL = function(newUrl){
         SC.get('/resolve.json', { url: newUrl }, function(data) {
             sound = data;
             soundFile.stop();
             soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id, play);
+            offset++;
         });
     } 
 
@@ -79,14 +79,7 @@ var sketch = function(p) {
             midLo = fft.getEnergy('lowMid');
             midHi = fft.getEnergy('mid');
             high = fft.getEnergy('highMid');
-        } else {
-            if (once){
-            increment();
-            changeURL(urls[offset]);
-            once = false;
-            setTimeout(function(){ once = true; }, 3000);
-            }
-        }
+        } 
     };
 
     p.draw = function() {
