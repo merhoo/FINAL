@@ -3,8 +3,8 @@ var fft, spectrum, low, midLo, midHi, high;
 var volume = 0;
 var maxx = 0;
 
-var client_id = '3018af38063abcf6a38748e9ad55b455';
-var url = 'https://soundcloud.com/shhsecretsongs/shh020-diveo-summer-trees';
+// var client_id = '3018af38063abcf6a38748e9ad55b455';
+// var url = 'https://soundcloud.com/shhsecretsongs/shh020-diveo-summer-trees';
 var sound, soundFile;
 
 var numpressed = 0;
@@ -12,8 +12,10 @@ var myp5;
 
 var sketch = function(p) {
     p.preload = function() {
-        soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id);
-        //soundFormats('ogg', 'mp3');
+        // soundFile = p.loadSound(sound.stream_url + '?client_id=' + client_id);
+        text('loading', width/2, height/2);
+        soundFormats('ogg', 'mp3');
+        soundFile = loadSound('fnd.mp3');
     };
 
     p.setup = function() {
@@ -107,7 +109,7 @@ var sketch = function(p) {
 
             /*noFill();
       for (var i = 1; i <= 20; i+=4){
-        rect(width/2 - ((low/4)*i)/2, 
+        rect(width/2 - ((low/4)*i)/2,
           height/2 - ((high/4)*i) /2, (low/4)*i, (high/4)*i );
   }*/
         } else if (numpressed == 2) {
